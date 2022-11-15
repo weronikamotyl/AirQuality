@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import pl.weronikamotyl.airquality.logic.GetStationsUseCase
+import pl.weronikamotyl.airquality.logic.usecase.GetStationsUseCase
 import javax.inject.Inject
 
 @HiltViewModel
