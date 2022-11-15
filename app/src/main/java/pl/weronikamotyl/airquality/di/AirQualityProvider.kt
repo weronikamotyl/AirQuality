@@ -1,8 +1,11 @@
 package pl.weronikamotyl.airquality.di
 
+import android.content.Context
+import androidx.room.Room
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -11,6 +14,8 @@ import pl.weronikamotyl.airquality.data.AirlyStationDataSource
 import pl.weronikamotyl.airquality.data.airly.AirlyConstants
 import pl.weronikamotyl.airquality.data.airly.AirlyService
 import pl.weronikamotyl.airquality.data.local.InMemoryStationsRepository
+import pl.weronikamotyl.airquality.data.local.db.AppDatabase
+import pl.weronikamotyl.airquality.data.local.db.DatabaseStationRepository
 import pl.weronikamotyl.airquality.logic.repository.LocalStationsRepository
 import pl.weronikamotyl.airquality.logic.repository.RemoteStationsRepository
 import retrofit2.Retrofit
@@ -30,9 +35,10 @@ object AirQualityProvider {
 
 	@Provides
 	@Singleton
-	fun provideLocalStationsRepository(): LocalStationsRepository {
-		//TODO: Later
-		return InMemoryStationsRepository()
+	fun provideLocalStationsRepository(@ApplicationContext appContext: Context): LocalStationsRepository {
+		val database =
+			Room.databaseBuilder(appContext, AppDatabase::class.java, "AirQualityDb").build()
+		return DatabaseStationRepository(database)
 	}
 
 
@@ -66,12 +72,6 @@ object AirQualityProvider {
 	@Singleton
 	fun provideAirlyService(retrofit: Retrofit): AirlyService {
 		return retrofit.create(AirlyService::class.java)
-//		return Retrofit
-//			.Builder()
-//			.baseUrl(AirlyStationDataSource.HOST)
-//			.addConverterFactory(GsonConverterFactory.create())
-//			.build()
-//			.create(AirlyStationDataSource.AirlyService::class.java)
 	}
 
 }
