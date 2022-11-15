@@ -1,6 +1,5 @@
 package pl.weronikamotyl.airquality.di
 
-import android.os.Build.HOST
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -11,10 +10,9 @@ import okhttp3.Response
 import pl.weronikamotyl.airquality.data.AirlyStationDataSource
 import pl.weronikamotyl.airquality.data.airly.AirlyConstants
 import pl.weronikamotyl.airquality.data.airly.AirlyService
-import pl.weronikamotyl.airquality.logic.RemoteStationsRepository
+import pl.weronikamotyl.airquality.logic.repository.RemoteStationsRepository
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.Headers
 import javax.inject.Singleton
 
 @Module
