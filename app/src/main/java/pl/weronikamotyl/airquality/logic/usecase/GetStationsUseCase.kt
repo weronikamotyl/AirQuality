@@ -9,6 +9,9 @@ class GetStationsUseCase @Inject constructor(
 ) {
 
 	suspend fun execute(): List<AQStation> {
+		remoteStationsRepository.getAll()
+		remoteStationsRepository.getAll()
+		remoteStationsRepository.getAll()
 		return remoteStationsRepository.getAll()
 	}
 }
